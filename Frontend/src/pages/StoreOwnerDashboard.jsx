@@ -373,34 +373,36 @@ export function StoreOwnerDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading store information...</p>
+          <div className="flex items-center gap-3">
+            <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-gray-400">Loading store information...</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-gray-800 border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
               <Store className="h-8 w-8 text-blue-600" />
               <div>
-                <h1 className="text-xl font-semibold text-gray-900">
+                <h1 className="text-xl font-semibold text-gray-200">
                   Store Owner Dashboard
                 </h1>
-                <p className="text-sm text-gray-600">{storeInfo.name}</p>
+                <p className="text-sm text-gray-400">{storeInfo.name}</p>
               </div>
             </div>
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="flex items-center gap-2 bg-transparent"
+              className="flex items-center gap-2 bg-gray-700/50 border-gray-600 text-gray-300 hover:bg-red-600/20 hover:border-red-500 hover:text-red-300 cursor-pointer transition-all duration-300 backdrop-blur-sm"
             >
               <LogOut className="h-4 w-4" />
               Logout
@@ -411,8 +413,8 @@ export function StoreOwnerDashboard() {
 
       {error && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
-            <p className="text-yellow-800">{error}</p>
+          <div className="bg-red-900/20 border border-red-700/50 rounded-md p-4 backdrop-blur-sm">
+            <p className="text-red-300">{error}</p>
           </div>
         </div>
       )}
@@ -420,33 +422,33 @@ export function StoreOwnerDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="bg-gray-800 border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+              <CardTitle className="text-sm font-medium text-gray-200">
                 Average Rating
               </CardTitle>
-              <Star className="h-4 w-4 text-muted-foreground" />
+              <Star className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-white">
                 {analytics.averageRating}
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-gray-400">
                 Based on all reviews
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gray-800 border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+              <CardTitle className="text-sm font-medium text-gray-200">
                 Total Reviews
               </CardTitle>
-              <MessageSquare className="h-4 w-4 text-muted-foreground" />
+              <MessageSquare className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{analytics.totalReviews}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-2xl font-bold text-white">{analytics.totalReviews}</div>
+              <p className="text-xs text-gray-400">
                 All-time customer reviews
               </p>
             </CardContent>
@@ -455,37 +457,37 @@ export function StoreOwnerDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="analytics" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            <TabsTrigger value="reviews">Reviews</TabsTrigger>
-            <TabsTrigger value="store">Store Settings</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 bg-gray-800 border-gray-700">
+            <TabsTrigger value="analytics" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">Analytics</TabsTrigger>
+            <TabsTrigger value="reviews" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">Reviews</TabsTrigger>
+            <TabsTrigger value="store" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">Store Settings</TabsTrigger>
           </TabsList>
 
           {/* Analytics Tab */}
           <TabsContent value="analytics">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
+              <Card className="bg-gray-800 border-gray-700">
                 <CardHeader>
-                  <CardTitle>Rating Distribution</CardTitle>
-                  <CardDescription>How customers rate your store</CardDescription>
+                  <CardTitle className="text-white">Rating Distribution</CardTitle>
+                  <CardDescription className="text-gray-400">How customers rate your store</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     {analytics.ratingDistribution.map((item) => (
                       <div key={item.rating} className="flex items-center gap-3">
                         <div className="flex items-center gap-1 w-12">
-                          <span className="text-sm">{item.rating}</span>
+                          <span className="text-sm text-gray-300">{item.rating}</span>
                           <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                         </div>
-                        <div className="flex-1 bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-blue-600 h-2 rounded-full"
+                        <div className="flex-1 bg-gray-700 rounded-full h-2">
+                          <div 
+                            className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out"
                             style={{
                               width: `${(item.count / analytics.totalReviews) * 100}%`,
                             }}
                           />
                         </div>
-                        <span className="text-sm text-muted-foreground w-8">
+                        <span className="text-sm text-gray-400 w-8">
                           {item.count}
                         </span>
                       </div>
@@ -494,14 +496,14 @@ export function StoreOwnerDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-gray-800 border-gray-700">
                 <CardHeader>
-                  <CardTitle>Recent Performance</CardTitle>
-                  <CardDescription>Your store's rating trend over the past week</CardDescription>
+                  <CardTitle className="text-white">Recent Performance</CardTitle>
+                  <CardDescription className="text-gray-400">Your store's rating trend over the past week</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {/* You need to implement logic to calculate recent ratings from the 'reviews' state */}
-                  <p className="text-muted-foreground">
+                  <p className="text-gray-400">
                     This section requires additional logic to process and display
                     recent performance data from your review timestamps.
                   </p>
@@ -512,25 +514,25 @@ export function StoreOwnerDashboard() {
 
           {/* Reviews Tab */}
           <TabsContent value="reviews">
-            <Card>
+            <Card className="bg-gray-800 border-gray-700">
               <CardHeader>
-                <CardTitle>Customer Reviews</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-white">Customer Reviews</CardTitle>
+                <CardDescription className="text-gray-400">
                   Manage and respond to customer feedback
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {reviews.map((review) => (
-                    <div key={review.id} className="border rounded-lg p-4">
+                    <div key={review.id} className="border border-gray-700 rounded-lg p-4 bg-gray-800/50">
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <h4 className="font-semibold">
+                          <h4 className="font-semibold text-white">
                             {`User id: ${review.user_id}`}
                           </h4>
                           <div className="flex items-center gap-2 mt-1">
                             {renderStars(review.rating)}
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-sm text-gray-300">
                               {review.date}
                             </span>
                           </div>
@@ -542,16 +544,16 @@ export function StoreOwnerDashboard() {
                                 variant="outline"
                                 size="sm"
                                 onClick={() => setSelectedReview(review)}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2 bg-gray-700/50 border-gray-600 text-gray-300 hover:bg-gray-600/50 hover:text-white"
                               >
                                 <Reply className="h-4 w-4" />
                                 Reply
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-md">
+                            <DialogContent className="sm:max-w-md bg-gray-800 border-gray-700">
                               <DialogHeader>
-                                <DialogTitle>Reply to Review</DialogTitle>
-                                <DialogDescription>
+                                <DialogTitle className="text-white">Reply to Review</DialogTitle>
+                                <DialogDescription className="text-gray-400">
                                   Respond to{" "}
                                   {review.customerName ||
                                     `User ${review.user_id}`}
@@ -559,20 +561,20 @@ export function StoreOwnerDashboard() {
                                 </DialogDescription>
                               </DialogHeader>
                               <div className="space-y-4">
-                                <div className="p-3 bg-gray-50 rounded-lg">
+                                <div className="p-3 bg-gray-700/50 rounded-lg">
                                   <div className="flex items-center gap-2 mb-2">
                                     {renderStars(review.rating)}
-                                    <span className="text-sm font-medium">
+                                    <span className="text-sm font-medium text-white">
                                       {review.customerName ||
                                         `User ${review.user_id}`}
                                     </span>
                                   </div>
-                                  <p className="text-sm text-muted-foreground">
+                                  <p className="text-sm text-gray-300">
                                     {review.comment}
                                   </p>
                                 </div>
                                 <div>
-                                  <Label htmlFor="response">
+                                  <Label htmlFor="response" className="text-gray-300">
                                     Your Response
                                   </Label>
                                   <Textarea
@@ -583,11 +585,12 @@ export function StoreOwnerDashboard() {
                                       setResponseText(e.target.value)
                                     }
                                     rows={4}
+                                    className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
                                   />
                                 </div>
                                 <Button
                                   onClick={handleSubmitResponse}
-                                  className="w-full"
+                                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                                   disabled={!responseText.trim()}
                                 >
                                   Send Response
@@ -597,11 +600,11 @@ export function StoreOwnerDashboard() {
                           </Dialog>
                         )}
                       </div>
-                      <p className="text-muted-foreground mb-3">{review.comment}</p>
+                      <p className="text-gray-300 mb-3">{review.comment}</p>
                       {review.response && (
-                        <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mt-3">
-                          <p className="text-sm">
-                            <span className="font-semibold">
+                        <div className="bg-blue-900/30 border-l-4 border-blue-500 p-3 mt-3">
+                          <p className="text-sm text-gray-300">
+                            <span className="font-semibold text-white">
                               Your response:
                             </span>{" "}
                             {review.response}
@@ -617,19 +620,19 @@ export function StoreOwnerDashboard() {
 
           {/* Store Settings Tab */}
           <TabsContent value="store">
-            <Card>
+            <Card className="bg-gray-800 border-gray-700">
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <div>
-                    <CardTitle>Store Information</CardTitle>
-                    <CardDescription>
+                    <CardTitle className="text-white">Store Information</CardTitle>
+                    <CardDescription className="text-gray-400">
                       Manage your store details and settings
                     </CardDescription>
                   </div>
                   <Button
                     variant="outline"
                     onClick={() => setIsEditingStore(!isEditingStore)}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 bg-gray-700/50 border-gray-600 text-gray-300 hover:bg-gray-600/50 hover:text-white"
                   >
                     <Edit className="h-4 w-4" />
                     {isEditingStore ? "Cancel" : "Edit"}
@@ -640,7 +643,7 @@ export function StoreOwnerDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="storeName">Store Name</Label>
+                      <Label htmlFor="storeName" className="text-gray-300">Store Name</Label>
                       <Input
                         id="storeName"
                         value={storeInfo.name}
@@ -648,10 +651,11 @@ export function StoreOwnerDashboard() {
                           setStoreInfo({ ...storeInfo, name: e.target.value })
                         }
                         disabled={!isEditingStore}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:bg-gray-800/50 disabled:text-gray-400"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="category">Category</Label>
+                      <Label htmlFor="category" className="text-gray-300">Category</Label>
                       <Input
                         id="category"
                         value={storeInfo.category}
@@ -659,10 +663,11 @@ export function StoreOwnerDashboard() {
                           setStoreInfo({ ...storeInfo, category: e.target.value })
                         }
                         disabled={!isEditingStore}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:bg-gray-800/50 disabled:text-gray-400"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Phone</Label>
+                      <Label htmlFor="phone" className="text-gray-300">Phone</Label>
                       <Input
                         id="phone"
                         value={storeInfo.phone}
@@ -670,10 +675,11 @@ export function StoreOwnerDashboard() {
                           setStoreInfo({ ...storeInfo, phone: e.target.value })
                         }
                         disabled={!isEditingStore}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:bg-gray-800/50 disabled:text-gray-400"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className="text-gray-300">Email</Label>
                       <Input
                         id="email"
                         value={storeInfo.email}
@@ -681,12 +687,13 @@ export function StoreOwnerDashboard() {
                           setStoreInfo({ ...storeInfo, email: e.target.value })
                         }
                         disabled={!isEditingStore}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:bg-gray-800/50 disabled:text-gray-400"
                       />
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="address">Address</Label>
+                      <Label htmlFor="address" className="text-gray-300">Address</Label>
                       <Textarea
                         id="address"
                         value={storeInfo.address}
@@ -695,10 +702,11 @@ export function StoreOwnerDashboard() {
                         }
                         disabled={!isEditingStore}
                         rows={3}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:bg-gray-800/50 disabled:text-gray-400"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="description">Description</Label>
+                      <Label htmlFor="description" className="text-gray-300">Description</Label>
                       <Textarea
                         id="description"
                         value={storeInfo.description}
@@ -710,10 +718,11 @@ export function StoreOwnerDashboard() {
                         }
                         disabled={!isEditingStore}
                         rows={4}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:bg-gray-800/50 disabled:text-gray-400"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="upload">Store Image</Label>
+                      <Label htmlFor="upload" className="text-gray-300">Store Image</Label>
                       <div className="space-y-2">
                         <Input
                           id="upload"
@@ -721,50 +730,50 @@ export function StoreOwnerDashboard() {
                           accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
                           onChange={handleImageChange}
                           disabled={!isEditingStore || uploading}
-                          className={uploading ? "cursor-not-allowed" : ""}
+                          className={`bg-gray-700/50 border-gray-600 text-gray-300 file:bg-gray-600 file:text-gray-200 file:border-0 file:rounded file:px-3 file:py-1 ${uploading ? "cursor-not-allowed" : ""}`}
                         />
                         
                         {/* Upload Status Display */}
                         {uploading && (
                           <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-sm text-blue-600">
+                            <div className="flex items-center gap-2 text-sm text-blue-400">
                               <Upload className="h-4 w-4 animate-pulse" />
                               <span>Uploading image...</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="w-full bg-gray-700 rounded-full h-2">
                               <div 
                                 className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out"
                                 style={{ width: `${uploadProgress}%` }}
                               ></div>
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-gray-400">
                               {Math.round(uploadProgress)}% complete
                             </div>
                           </div>
                         )}
 
                         {uploadStatus === 'success' && (
-                          <div className="flex items-center gap-2 text-sm text-green-600 bg-green-50 p-2 rounded-md">
+                          <div className="flex items-center gap-2 text-sm text-green-400 bg-green-900/20 p-2 rounded-md border border-green-700/50">
                             <Check className="h-4 w-4" />
                             <span>Image uploaded successfully!</span>
                           </div>
                         )}
 
                         {uploadStatus === 'error' && (
-                          <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-2 rounded-md">
+                          <div className="flex items-center gap-2 text-sm text-red-400 bg-red-900/20 p-2 rounded-md border border-red-700/50">
                             <AlertCircle className="h-4 w-4" />
                             <span>Upload failed. Please try again.</span>
                           </div>
                         )}
 
                         {uploadError && (
-                          <div className="text-sm text-red-600 bg-red-50 p-2 rounded-md">
+                          <div className="text-sm text-red-400 bg-red-900/20 p-2 rounded-md border border-red-700/50">
                             {uploadError}
                           </div>
                         )}
 
                         {selectedFile && !uploading && (
-                          <div className="text-sm text-gray-600">
+                          <div className="text-sm text-gray-400">
                             Selected: {selectedFile.name} ({Math.round(selectedFile.size / 1024)}KB)
                           </div>
                         )}
@@ -772,11 +781,11 @@ export function StoreOwnerDashboard() {
                         {/* Current Image Preview */}
                         {storeInfo.image_url && typeof storeInfo.image_url === 'string' && (
                           <div className="mt-2">
-                            <Label className="text-sm text-gray-600 mb-2 block">Current Image:</Label>
+                            <Label className="text-sm text-gray-400 mb-2 block">Current Image:</Label>
                             <img 
                               src={storeInfo.image_url} 
                               alt="Store" 
-                              className="w-24 h-24 object-cover rounded-lg border"
+                              className="w-24 h-24 object-cover rounded-lg border border-gray-600"
                               onError={(e) => {
                                 e.target.style.display = 'none';
                               }}
@@ -802,12 +811,14 @@ export function StoreOwnerDashboard() {
                         setUploadStatus(null);
                       }}
                       disabled={uploading}
+                      className="bg-gray-700/50 border-gray-600 text-gray-300 hover:bg-gray-600/50 hover:text-white"
                     >
                       Cancel
                     </Button>
                     <Button 
                       onClick={handleUpdateStore}
                       disabled={uploading}
+                      className="bg-blue-600 hover:bg-blue-700 text-white"
                     >
                       {uploading ? "Uploading..." : "Save Changes"}
                     </Button>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 import { Button } from "../components/Button";
@@ -82,25 +81,25 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="shadow-xl border-0">
+    <Card className="shadow-2xl border-gray-700/50 bg-gray-800/80 backdrop-blur-sm">
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold text-slate-800">Welcome Back</CardTitle>
-        <CardDescription className="text-slate-600">Sign in to your account to continue</CardDescription>
+        <CardTitle className="text-2xl font-bold text-white">Welcome Back</CardTitle>
+        <CardDescription className="text-gray-300">Sign in to your account to continue</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <Alert variant="destructive">
+            <Alert variant="destructive" className="bg-red-900/50 border-red-700/50 text-red-300">
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-700">
+            <Label htmlFor="email" className="text-gray-200">
               Email
             </Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
                 id="email"
                 name="email"
@@ -108,18 +107,18 @@ export function LoginForm() {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="pl-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500/20 focus:bg-gray-700/70 transition-all duration-200"
                 required
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-slate-700">
+            <Label htmlFor="password" className="text-gray-200">
               Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
                 id="password"
                 name="password"
@@ -127,27 +126,38 @@ export function LoginForm() {
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="pl-10 pr-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 pr-10 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500/20 focus:bg-gray-700/70 transition-all duration-200"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-3 text-gray-400 hover:text-gray-200 transition-colors duration-200"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white cursor-pointer" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Sign In"}
+          <Button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white cursor-pointer transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl" 
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                Signing in...
+              </div>
+            ) : (
+              "Sign In"
+            )}
           </Button>
         </form>
 
-        <div className="text-center text-sm text-slate-600">
+        <div className="text-center text-sm text-gray-300">
           Don't have an account?{" "}
-          <NavLink to="/signup" className="text-blue-600 hover:text-blue-700 font-medium">
+          <NavLink to="/signup" className="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">
             Sign up
           </NavLink>
         </div>

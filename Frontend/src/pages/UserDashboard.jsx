@@ -201,15 +201,21 @@ export function UserDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <header className="bg-gray-800/80 backdrop-blur-md border-b border-gray-700/50 sticky top-0 z-50 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <Star className="h-8 w-8 text-blue-600" />
-              <h1 className="text-xl font-semibold text-gray-900">Store Rating Platform</h1>
+              <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg">
+                <Star className="h-6 w-6 text-white" />
+              </div>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Store Rating Platform</h1>
             </div>
-            <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2 bg-transparent cursor-pointer">
+            <Button 
+              variant="outline" 
+              onClick={handleLogout} 
+              className="flex items-center gap-2 bg-gray-700/50 border-gray-600 text-gray-300 hover:bg-red-600/20 hover:border-red-500 hover:text-red-300 cursor-pointer transition-all duration-300 backdrop-blur-sm"
+            >
               <LogOut className="h-4 w-4" />
               Logout
             </Button>
@@ -219,30 +225,30 @@ export function UserDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="browse" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="browse">Browse Stores</TabsTrigger>
-            <TabsTrigger value="reviews">My Reviews</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 bg-gray-800 border-gray-700">
+            <TabsTrigger value="browse" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">Browse Stores</TabsTrigger>
+            <TabsTrigger value="reviews" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">My Reviews</TabsTrigger>
           </TabsList>
 
           <TabsContent value="browse">
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="Search stores..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                 />
               </div>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-full sm:w-48">
-                  <Filter className="h-4 w-4 mr-2" />
+                <SelectTrigger className="w-full sm:w-48 bg-gray-700/50 border-gray-600 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm">
+                  <Filter className="h-4 w-4 mr-2 text-gray-400" />
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-gray-700/95 border-gray-600/50 backdrop-blur-md">
                   {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
+                    <SelectItem key={category} value={category} className="text-white hover:bg-gray-600/50 focus:bg-gray-600/50">
                       {category === "all" ? "All Categories" : category}
                     </SelectItem>
                   ))}
@@ -277,7 +283,7 @@ export function UserDashboard() {
             {!loading && !error && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredStores.map((store) => (
-                  <Card key={store.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <Card key={store.id} className="overflow-hidden hover:shadow-lg transition-shadow bg-gray-800 border-gray-700 hover:shadow-blue-500/25">
                     <div className="aspect-video relative">
                       <img 
                         src={store.image} 
@@ -291,62 +297,63 @@ export function UserDashboard() {
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-lg">{store.name}</CardTitle>
-                          <Badge variant="secondary" className="mt-1">
+                          <CardTitle className="text-lg text-white">{store.name}</CardTitle>
+                          <Badge variant="secondary" className="mt-1 bg-gradient-to-r from-gray-600 to-gray-500 text-white border-0 shadow-lg">
                             {store.category}
                           </Badge>
                         </div>
                         <div className="text-right">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="font-semibold">{store.rating}</span>
+                            <span className="font-semibold text-white">{store.rating}</span>
                           </div>
-                          <p className="text-sm text-muted-foreground">({store.reviewCount} reviews)</p>
+                          <p className="text-sm text-gray-400">({store.reviewCount} reviews)</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground mb-3">{store.description}</p>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                      <p className="text-sm text-gray-300 mb-3">{store.description}</p>
+                      <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
                         <MapPin className="h-4 w-4" />
                         <span>{store.address}</span>
                       </div>
                       {store.phone && (
-                        <div className="text-sm text-muted-foreground mb-2">
+                        <div className="text-sm text-gray-400 mb-2">
                           Phone: {store.phone}
                         </div>
                       )}
                       {store.email && (
-                        <div className="text-sm text-muted-foreground mb-4">
+                        <div className="text-sm text-gray-400 mb-4">
                           Email: {store.email}
                         </div>
                       )}
                       <Dialog>
                         <DialogTrigger asChild>
-                          <Button className="w-full" onClick={() => setSelectedStore(store)}>
+                          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setSelectedStore(store)}>
                             Rate This Store
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-md">
+                        <DialogContent className="sm:max-w-md bg-gray-800 border-gray-700">
                           <DialogHeader>
-                            <DialogTitle>Rate {selectedStore?.name}</DialogTitle>
-                            <DialogDescription>Share your experience with other customers</DialogDescription>
+                            <DialogTitle className="text-white">Rate {selectedStore?.name}</DialogTitle>
+                            <DialogDescription className="text-gray-400">Share your experience with other customers</DialogDescription>
                           </DialogHeader>
                           <div className="space-y-4">
                             <div>
-                              <label className="text-sm font-medium mb-2 block">Your Rating</label>
+                              <label className="text-sm font-medium mb-2 block text-gray-300">Your Rating</label>
                               {renderStars(rating, true, setRating)}
                             </div>
                             <div>
-                              <label className="text-sm font-medium mb-2 block">Your Review</label>
+                              <label className="text-sm font-medium mb-2 block text-gray-300">Your Review</label>
                               <Textarea
                                 placeholder="Tell others about your experience..."
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                                 rows={4}
+                                className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                               />
                             </div>
-                            <Button onClick={handleSubmitReview} className="w-full" disabled={rating === 0 || !comment.trim()}>
+                            <Button onClick={handleSubmitReview} className="w-full bg-blue-600 hover:bg-blue-700 text-white" disabled={rating === 0 || !comment.trim()}>
                               Submit Review
                             </Button>
                           </div>
@@ -360,10 +367,10 @@ export function UserDashboard() {
           </TabsContent>
 
           <TabsContent value="reviews">
-  <Card>
+  <Card className="bg-gray-800 border-gray-700">
     <CardHeader>
-      <CardTitle>My Reviews</CardTitle>
-      <CardDescription>Your rating history and reviews</CardDescription>
+      <CardTitle className="text-white">My Reviews</CardTitle>
+      <CardDescription className="text-gray-400">Your rating history and reviews</CardDescription>
     </CardHeader>
     <CardContent>
       <div className="space-y-4">
@@ -372,15 +379,15 @@ export function UserDashboard() {
           const store = stores.find((s) => s.id === review.storeId);
 
           return (
-            <div key={review.id} className="border rounded-lg p-4">
+            <div key={review.id} className="border border-gray-700 rounded-lg p-4 bg-gray-800/50">
               <div className="flex justify-between items-start mb-2">
                 {/* Use store.name if found, otherwise fallback to the ID */}
-                <h3 className="font-semibold">
+                <h3 className="font-semibold text-white">
                   {getStoreNameById(review.storeId)}
                 </h3>
                 <div className="flex items-center gap-2">
                   {renderStars(review.ratingValue)}
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-gray-400">
                      {review.createdAt 
                                   ? new Date(review.createdAt).toLocaleDateString('en-US', {
                                       year: 'numeric',
@@ -392,7 +399,7 @@ export function UserDashboard() {
                   </span>
                 </div>
               </div>
-              <p className="text-muted-foreground">{review.comment}</p>
+              <p className="text-gray-300">{review.comment}</p>
             </div>
           );
         })}

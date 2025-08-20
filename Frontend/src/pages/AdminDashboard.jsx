@@ -361,16 +361,24 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-gray-800/80 backdrop-blur-md border-b border-gray-700/50 sticky top-0 z-50 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <Shield className="h-8 w-8 text-blue-600" />
-              <h1 className="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
+              <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg">
+                <Shield className="h-6 w-6 text-white" />
+              </div>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Admin Dashboard
+              </h1>
             </div>
-            <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2 bg-transparent cursor-pointer">
+            <Button 
+              variant="outline" 
+              onClick={handleLogout} 
+              className="flex items-center gap-2 bg-gray-700/50 border-gray-600 text-gray-300 hover:bg-red-600/20 hover:border-red-500 hover:text-red-300 cursor-pointer transition-all duration-300 backdrop-blur-sm"
+            >
               <LogOut className="h-4 w-4" /> Logout
             </Button>
           </div>
@@ -380,52 +388,52 @@ export default function AdminDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="bg-gray-800 border-gray-700">
             <CardHeader className="flex justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-gray-200">Total Users</CardTitle>
+              <Users className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{users.length}</div>
-              <p className="text-xs text-muted-foreground">Total registered users</p>
+              <div className="text-2xl font-bold text-white">{users.length}</div>
+              <p className="text-xs text-gray-400">Total registered users</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gray-800 border-gray-700">
             <CardHeader className="flex justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Active Stores</CardTitle>
-              <Store className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-gray-200">Active Stores</CardTitle>
+              <Store className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stores.length}</div>
-              <p className="text-xs text-muted-foreground">Currently active stores</p>
+              <div className="text-2xl font-bold text-white">{stores.length}</div>
+              <p className="text-xs text-gray-400">Currently active stores</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gray-800 border-gray-700">
             <CardHeader className="flex justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total Ratings</CardTitle>
-              <Star className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-gray-200">Total Ratings</CardTitle>
+              <Star className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{ratings.length}</div>
-              <p className="text-xs text-muted-foreground">Total user ratings</p>
+              <div className="text-2xl font-bold text-white">{ratings.length}</div>
+              <p className="text-xs text-gray-400">Total user ratings</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gray-800 border-gray-700">
             <CardHeader className="flex justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Avg Rating</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-gray-200">Avg Rating</CardTitle>
+              <TrendingUp className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-white">
                 {ratings.length > 0 
                   ? (ratings.reduce((acc, rating) => acc + rating.rating_value, 0) / ratings.length).toFixed(1)
                   : "0.0"
                 }
               </div>
-              <p className="text-xs text-muted-foreground">Average rating score</p>
+              <p className="text-xs text-gray-400">Average rating score</p>
             </CardContent>
           </Card>
         </div>
@@ -433,184 +441,206 @@ export default function AdminDashboard() {
         {/* Management Tabs */}
         {/* make this responsive */}
         <Tabs defaultValue="users" className="space-y-6 ">
-          <TabsList className="grid w-full grid-cols-3  ">
-            <TabsTrigger value="users">User Management</TabsTrigger>
-            <TabsTrigger value="stores">Store Management</TabsTrigger>
-            <TabsTrigger value="ratings">Rating Management</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 bg-gray-800 border-gray-700">
+            <TabsTrigger value="users" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">User Management</TabsTrigger>
+            <TabsTrigger value="stores" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">Store Management</TabsTrigger>
+            <TabsTrigger value="ratings" className="data-[state=active]:bg-gray-700 data-[state=active]:text-white text-gray-300">Rating Management</TabsTrigger>
           </TabsList>
 
           {/* Users Tab */}
-          <TabsContent value="users">
-            <Card>
-              <CardHeader className="flex justify-between items-center">
+          <TabsContent value="users" className="animate-in fade-in-50 duration-300">
+            <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-gray-700/50 backdrop-blur-sm shadow-2xl">
+              <CardHeader className="flex justify-between items-center border-b border-gray-700/50 pb-6">
                 <div>
-                  <CardTitle>User Management</CardTitle>
-                  <CardDescription>Manage all registered users</CardDescription>
+                  <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    User Management
+                  </CardTitle>
+                  <CardDescription className="text-gray-400 mt-2">Manage all registered users</CardDescription>
                 </div>
                 <div className="flex items-center gap-4">
                   {/* for small screen hide  */}
                   <div className="hidden sm:block relative">
-                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       placeholder="Search users..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-8 w-64"
+                      className="pl-10 w-64 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                     />
                   </div>
 
                   <Dialog open={isAddUserOpen} onOpenChange={setIsAddUserOpen}>
                     <DialogTrigger asChild>
-                      <Button className="flex items-center gap-2">
+                      <Button className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-0.5">
                         <Plus className="h-4 w-4" /> Add User
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
+                    <DialogContent className="sm:max-w-[425px] bg-gradient-to-br from-gray-800/95 to-gray-900/95 border-gray-700/50 backdrop-blur-md shadow-2xl">
                       <DialogHeader>
-                        <DialogTitle>Add New User</DialogTitle>
-                        <p>Create a new user account. Fill in all the required information.</p>
+                        <DialogTitle className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                          Add New User
+                        </DialogTitle>
+                        <p className="text-gray-400">Create a new user account. Fill in all the required information.</p>
                       </DialogHeader>
                       <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right">Name</Label>
+                          <Label className="text-right text-gray-300 font-medium">Name</Label>
                           <Input
                             value={newUser.name}
                             onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                            className="col-span-3"
+                            className="col-span-3 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                             placeholder="Enter full name"
                           />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right">Email</Label>
+                          <Label className="text-right text-gray-300 font-medium">Email</Label>
                           <Input
                             type="email"
                             value={newUser.email}
                             onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                            className="col-span-3"
+                            className="col-span-3 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                             placeholder="Enter email address"
                           />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right">Password</Label>
+                          <Label className="text-right text-gray-300 font-medium">Password</Label>
                           <Input
                             type="password"
                             value={newUser.password}
                             onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                            className="col-span-3"
+                            className="col-span-3 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm"
                             placeholder="Enter password"
                           />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right">Address</Label>
+                          <Label className="text-right text-gray-300 font-medium">Address</Label>
                           <Textarea
                             value={newUser.address}
                             onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
-                            className="col-span-3"
+                            className="col-span-3 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm resize-none"
                             rows={3}
                             placeholder="Enter address"
                           />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right">Role</Label>
+                          <Label className="text-right text-gray-300 font-medium">Role</Label>
                           <Select onValueChange={(val) => setNewUser({ ...newUser, role: val })}>
-                            <SelectTrigger className="col-span-3">
+                            <SelectTrigger className="col-span-3 bg-gray-700/50 border-gray-600/50 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-sm">
                               <SelectValue placeholder="Select user role" />
                             </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="ADMIN">Admin</SelectItem>
-                              <SelectItem value="USER">User</SelectItem>
-                              <SelectItem value="OWNER">Owner</SelectItem>
+                            <SelectContent className="bg-gray-700/95 border-gray-600/50 backdrop-blur-md">
+                              <SelectItem value="ADMIN" className="text-white hover:bg-gray-600/50 focus:bg-gray-600/50">Admin</SelectItem>
+                              <SelectItem value="USER" className="text-white hover:bg-gray-600/50 focus:bg-gray-600/50">User</SelectItem>
+                              <SelectItem value="OWNER" className="text-white hover:bg-gray-600/50 focus:bg-gray-600/50">Owner</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
                       </div>
                       <DialogFooter>
-                        <Button onClick={handleAddUser}>Add User</Button>
+                        <Button 
+                          onClick={handleAddUser} 
+                          className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          Add User
+                        </Button>
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-0">
                 {loading ? (
                   <div className="flex justify-center items-center h-32">
-                    <p>Loading users...</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                      <p className="text-gray-400">Loading users...</p>
+                    </div>
                   </div>
                 ) : (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Role</TableHead>
-                        <TableHead>Join Date</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {users.length === 0 ? (
-                        <TableRow>
-                          <TableCell colSpan={5} className="text-center py-4">
-                            No users found
-                          </TableCell>
+                  <div className="overflow-hidden rounded-b-lg">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-gray-700/50 bg-gray-800/50">
+                          <TableHead className="text-gray-300 font-semibold">Name</TableHead>
+                          <TableHead className="text-gray-300 font-semibold">Email</TableHead>
+                          <TableHead className="text-gray-300 font-semibold">Role</TableHead>
+                          <TableHead className="text-gray-300 font-semibold">Join Date</TableHead>
+                          <TableHead className="text-right text-gray-300 font-semibold">Actions</TableHead>
                         </TableRow>
-                      ) : (
-                        users
-                          .filter(user => {
-                            if (!user || (!user.name && !user.email)) return false;
-                            const name = user.name || '';
-                            const email = user.email || '';
-                            return name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                   email.toLowerCase().includes(searchTerm.toLowerCase());
-                          })
-                          .map((user) => (
-                            <TableRow key={getUserId(user)}>
-                              <TableCell className="font-medium">{user.name || 'N/A'}</TableCell>
-                              <TableCell>{user.email || 'N/A'}</TableCell>
-                              <TableCell>
-                                <Badge
-                                  variant={
-                                    user.role === "ADMIN" ? "default" : 
-                                    user.role === "OWNER" ? "secondary" : "outline"
+                      </TableHeader>
+                      <TableBody>
+                        {users.length === 0 ? (
+                          <TableRow className="border-gray-700/50">
+                            <TableCell colSpan={5} className="text-center py-8 text-gray-400">
+                              <div className="flex flex-col items-center gap-2">
+                                <Users className="h-12 w-12 text-gray-600" />
+                                <p>No users found</p>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ) : (
+                          users
+                            .filter(user => {
+                              if (!user || (!user.name && !user.email)) return false;
+                              const name = user.name || '';
+                              const email = user.email || '';
+                              return name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                     email.toLowerCase().includes(searchTerm.toLowerCase());
+                            })
+                            .map((user) => (
+                              <TableRow key={getUserId(user)} className="border-gray-700/50 hover:bg-gray-800/30 transition-all duration-200 group">
+                                <TableCell className="font-medium text-white group-hover:text-blue-300 transition-colors">{user.name || 'N/A'}</TableCell>
+                                <TableCell className="text-gray-300">{user.email || 'N/A'}</TableCell>
+                                <TableCell>
+                                  <Badge
+                                    variant={
+                                      user.role === "ADMIN" ? "default" : 
+                                      user.role === "OWNER" ? "secondary" : "outline"
+                                    }
+                                    className={
+                                      user.role === "ADMIN" ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white border-0 shadow-lg" :
+                                      user.role === "OWNER" ? "bg-gradient-to-r from-green-600 to-green-500 text-white border-0 shadow-lg" : 
+                                      "bg-gradient-to-r from-gray-600 to-gray-500 text-white border-0 shadow-lg"
+                                    }
+                                  >
+                                    {user.role || 'USER'}
+                                  </Badge>
+                                </TableCell>
+                                <TableCell className="text-gray-300">
+                                  {user.created_at 
+                                    ? new Date(user.created_at).toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'short', 
+                                        day: 'numeric'
+                                      })
+                                    : user.joinDate || "N/A"
                                   }
-                                >
-                                  {user.role || 'USER'}
-                                </Badge>
-                              </TableCell>
-                              <TableCell>
-                                {user.created_at 
-                                  ? new Date(user.created_at).toLocaleDateString('en-US', {
-                                      year: 'numeric',
-                                      month: 'short', 
-                                      day: 'numeric'
-                                    })
-                                  : user.joinDate || "N/A"
-                                }
-                              </TableCell>
-                              <TableCell className="text-right">
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost" className="h-8 w-8 p-0">
-                                      <MoreHorizontal className="h-4 w-4" />
-                                    </Button>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end">
-                                    <DropdownMenuItem>Edit User</DropdownMenuItem>
-                                    <DropdownMenuItem>View Details</DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                      className="text-red-600" 
-                                      onClick={() => handleDeleteUser(user)}
-                                    >
-                                      Delete User
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
-                              </TableCell>
-                            </TableRow>
-                          ))
-                      )}
-                    </TableBody>
-                  </Table>
+                                </TableCell>
+                                <TableCell className="text-right">
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button variant="ghost" className="h-8 w-8 p-0 text-gray-400 hover:bg-gray-700/50 hover:text-white transition-all duration-200">
+                                        <MoreHorizontal className="h-4 w-4" />
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end" className="bg-gray-700/95 border-gray-600/50 backdrop-blur-md shadow-xl">
+                                      <DropdownMenuItem className="text-gray-300 hover:bg-gray-600/50 hover:text-white focus:bg-gray-600/50 focus:text-white transition-all">Edit User</DropdownMenuItem>
+                                      <DropdownMenuItem className="text-gray-300 hover:bg-gray-600/50 hover:text-white focus:bg-gray-600/50 focus:text-white transition-all">View Details</DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        className="text-red-400 hover:bg-red-600/20 hover:text-red-300 focus:bg-red-600/20 focus:text-red-300 transition-all" 
+                                        onClick={() => handleDeleteUser(user)}
+                                      >
+                                        Delete User
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </TableCell>
+                              </TableRow>
+                            ))
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -618,95 +648,120 @@ export default function AdminDashboard() {
 
           {/* Stores Tab - Updated */}
           <TabsContent value="stores">
-            <Card>
+            <Card className="bg-gray-800 border-gray-700">
               <CardHeader className="flex justify-between items-center">
                 <div>
-                  <CardTitle>Store Management</CardTitle>
-                  <CardDescription>Manage all registered stores</CardDescription>
+                  <CardTitle className="text-white">Store Management</CardTitle>
+                  <CardDescription className="text-gray-400">Manage all registered stores</CardDescription>
                 </div>
                 <Dialog open={isAddStoreOpen} onOpenChange={setIsAddStoreOpen}>
                   <DialogTrigger asChild>
-                    <Button className="flex items-center gap-2">
+                    <Button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white">
                       <Plus className="h-4 w-4" /> Add Store
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
+                  <DialogContent className="sm:max-w-[425px] bg-gray-800 border-gray-700">
                     <DialogHeader>
-                      <DialogTitle>Add New Store</DialogTitle>
-                      <p>Create a new store entry. Fill in all the required information.</p>
+                      <DialogTitle className="text-white">Add New Store</DialogTitle>
+                      <p className="text-gray-400">Create a new store entry. Fill in all the required information.</p>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
                       {/* Store Name */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Name</Label>
+                        <Label className="text-right text-gray-300">Name</Label>
                         <Input
                           value={newStore.name}
                           onChange={(e) => setNewStore({ ...newStore, name: e.target.value })}
-                          className="col-span-3"
+                          className="col-span-3 bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                           placeholder="Enter store name"
                         />
                       </div>
 
                       {/* Store Email */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Email</Label>
+                        <Label className="text-right text-gray-300">Email</Label>
                         <Input
                           type="email"
                           value={newStore.email}
                           onChange={(e) => setNewStore({ ...newStore, email: e.target.value })}
-                          className="col-span-3"
+                          className="col-span-3 bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                           placeholder="Enter store email"
                         />
                       </div>
 
                       {/* Owner Selection */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Owner</Label>
+                        <Label className="text-right text-gray-300">Owner</Label>
                         <Select onValueChange={(val) => setNewStore({ ...newStore, owner_id: val })}>
-                          <SelectTrigger className="col-span-3">
+                          <SelectTrigger className="col-span-3 bg-gray-700 border-gray-600 text-white">
                             <SelectValue placeholder="Select store owner" />
                           </SelectTrigger>
-                          <SelectContent>
-                            {users.map((user) => (
-                              user.role === "OWNER" && (
-                              <SelectItem 
-                                key={getUserId(user)} 
-                                value={String(getUserId(user))}
-                              >
-                                {user.name} ({user.email})
-                              </SelectItem>
-                            ))
-                          )}
+                          <SelectContent className="bg-gray-700 border-gray-600">
+                            {users.filter(user => user.role === "OWNER").length > 0 ? (
+                              users
+                                .filter(user => user.role === "OWNER")
+                                .map((user) => (
+                                  <SelectItem 
+                                    key={getUserId(user)} 
+                                    value={String(getUserId(user))}
+                                    className="text-white hover:bg-gray-600"
+                                  >
+                                    {user.name} ({user.email})
+                                  </SelectItem>
+                                ))
+                            ) : (
+                              <>
+                                <SelectItem value="no-owners" disabled className="text-gray-400">
+                                  No owners available
+                                </SelectItem>
+                                {users.length > 0 && (
+                                  <>
+                                    <SelectItem value="separator" disabled className="text-gray-400">
+                                      --- All Users ---
+                                    </SelectItem>
+                                    {users.map((user) => (
+                                      <SelectItem 
+                                        key={getUserId(user)} 
+                                        value={String(getUserId(user))}
+                                        className="text-white hover:bg-gray-600"
+                                      >
+                                        {user.name} ({user.email}) - {user.role || 'USER'}
+                                      </SelectItem>
+                                    ))}
+                                  </>
+                                )}
+                              </>
+                            )}
                           </SelectContent>
                         </Select>
                       </div>
 
                       {/* Category */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Category</Label>
+                        <Label className="text-right text-gray-300">Category</Label>
                         <Select onValueChange={(val) => setNewStore({ ...newStore, category: val })}>
-                          <SelectTrigger className="col-span-3">
+                          <SelectTrigger className="col-span-3 bg-gray-700 border-gray-600 text-white">
                             <SelectValue placeholder="Select category" />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Electronics">Electronics</SelectItem>
-                            <SelectItem value="Clothing">Clothing</SelectItem>
-                            <SelectItem value="Books">Books</SelectItem>
-                            <SelectItem value="Grocery">Grocery</SelectItem>
-                            <SelectItem value="Cafe">Cafe</SelectItem>
-                            <SelectItem value="Sports">Sports</SelectItem>
-                            <SelectItem value="Other">Other</SelectItem>
+                          <SelectContent className="bg-gray-700 border-gray-600">
+                            <SelectItem value="Electronics" className="text-white hover:bg-gray-600">Electronics</SelectItem>
+                            <SelectItem value="Clothing" className="text-white hover:bg-gray-600">Clothing</SelectItem>
+                            <SelectItem value="Books" className="text-white hover:bg-gray-600">Books</SelectItem>
+                            <SelectItem value="Grocery" className="text-white hover:bg-gray-600">Grocery</SelectItem>
+                            <SelectItem value="Cafe" className="text-white hover:bg-gray-600">Cafe</SelectItem>
+                            <SelectItem value="Sports" className="text-white hover:bg-gray-600">Sports</SelectItem>
+                            <SelectItem value="Other" className="text-white hover:bg-gray-600">Other</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
 
                       {/* Address */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Address</Label>
+                        <Label className="text-right text-gray-300">Address</Label>
                         <Textarea
                           value={newStore.address}
                           onChange={(e) => setNewStore({ ...newStore, address: e.target.value })}
-                          className="col-span-3"
+                          className="col-span-3 bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                           rows={3}
                           placeholder="Enter store address"
                         />
@@ -714,29 +769,29 @@ export default function AdminDashboard() {
 
                       {/* Phone */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Phone</Label>
+                        <Label className="text-right text-gray-300">Phone</Label>
                         <Input
                           value={newStore.phone}
                           onChange={(e) => setNewStore({ ...newStore, phone: e.target.value })}
-                          className="col-span-3"
+                          className="col-span-3 bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                           placeholder="Enter phone number"
                         />
                       </div>
 
                       {/* Description */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Description</Label>
+                        <Label className="text-right text-gray-300">Description</Label>
                         <Textarea
                           value={newStore.description}
                           onChange={(e) => setNewStore({ ...newStore, description: e.target.value })}
-                          className="col-span-3"
+                          className="col-span-3 bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                           rows={3}
                           placeholder="Store description"
                         />
                       </div>
                     </div>
                     <DialogFooter>
-                      <Button onClick={handleAddStore}>Add Store</Button>
+                      <Button onClick={handleAddStore} className="bg-blue-600 hover:bg-blue-700 text-white">Add Store</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -744,60 +799,60 @@ export default function AdminDashboard() {
               <CardContent>
                 {loading ? (
                   <div className="flex justify-center items-center h-32">
-                    <p>Loading stores...</p>
+                    <p className="text-gray-400">Loading stores...</p>
                   </div>
                 ) : (
                   <Table>
                     <TableHeader>
-                      <TableRow>
-                        <TableHead>Store Name</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Owner</TableHead>
-                        <TableHead>Category</TableHead>
-                        <TableHead>Rating</TableHead>
-                        <TableHead>Reviews</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
+                      <TableRow className="border-gray-700">
+                        <TableHead className="text-gray-300">Store Name</TableHead>
+                        <TableHead className="text-gray-300">Email</TableHead>
+                        <TableHead className="text-gray-300">Owner</TableHead>
+                        <TableHead className="text-gray-300">Category</TableHead>
+                        <TableHead className="text-gray-300">Rating</TableHead>
+                        <TableHead className="text-gray-300">Reviews</TableHead>
+                        <TableHead className="text-gray-300">Status</TableHead>
+                        <TableHead className="text-right text-gray-300">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {stores.length === 0 ? (
-                        <TableRow>
-                          <TableCell colSpan={8} className="text-center py-4">
+                        <TableRow className="border-gray-700">
+                          <TableCell colSpan={8} className="text-center py-4 text-gray-400">
                             No stores found
                           </TableCell>
                         </TableRow>
                       ) : (
                         stores.map((store) => (
-                          <TableRow key={getStoreId(store)}>
-                            <TableCell className="font-medium">{store.name}</TableCell>
-                            <TableCell>{store.email}</TableCell>
-                            <TableCell>{getUserNameById(store.owner_id)}</TableCell>
-                            <TableCell>{store.category}</TableCell>
+                          <TableRow key={getStoreId(store)} className="border-gray-700 hover:bg-gray-750">
+                            <TableCell className="font-medium text-white">{store.name}</TableCell>
+                            <TableCell className="text-gray-300">{store.email}</TableCell>
+                            <TableCell className="text-gray-300">{getUserNameById(store.owner_id)}</TableCell>
+                            <TableCell className="text-gray-300">{store.category}</TableCell>
                             <TableCell>
                               <div className="flex items-center gap-1 ">
                                 <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" /> 
-                                {store.average_rating || "0.0"}
+                                <span className="text-white">{store.average_rating || "0.0"}</span>
                               </div>
                             </TableCell>
-                            <TableCell>{store.review_count || store.reviewCount || 0}</TableCell>
+                            <TableCell className="text-gray-300">{store.review_count || store.reviewCount || 0}</TableCell>
                             <TableCell>
-                              <Badge variant={"default"}>
+                              <Badge variant={"default"} className="bg-green-600 text-white">
                                 {"active"}
                               </Badge>
                             </TableCell>
                             <TableCell className="text-right">
                                                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                  <Button variant="ghost" className="h-8 w-8 p-0">
+                                  <Button variant="ghost" className="h-8 w-8 p-0 text-gray-400 hover:bg-gray-700 hover:text-white">
                                     <MoreHorizontal className="h-4 w-4" />
                                   </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                  <DropdownMenuItem>Edit Store</DropdownMenuItem>
-                                  <DropdownMenuItem>View Details</DropdownMenuItem>
+                                <DropdownMenuContent align="end" className="bg-gray-700 border-gray-600">
+                                  <DropdownMenuItem className="text-gray-300 hover:bg-gray-600 hover:text-white">Edit Store</DropdownMenuItem>
+                                  <DropdownMenuItem className="text-gray-300 hover:bg-gray-600 hover:text-white">View Details</DropdownMenuItem>
                                   <DropdownMenuItem 
-                                    className="text-red-600"
+                                    className="text-red-400 hover:bg-gray-600 hover:text-red-300"
                                     onClick={() => handleDeleteStore(store)}
                                   >
                                     Delete Store
@@ -817,62 +872,62 @@ export default function AdminDashboard() {
 
           {/* Ratings Tab */}
           <TabsContent value="ratings">
-            <Card>
+            <Card className="bg-gray-800 border-gray-700">
               <CardHeader className="flex justify-between items-center">
                 <div>
-                  <CardTitle>Rating Management</CardTitle>
-                  <CardDescription>Manage all user ratings and reviews</CardDescription>
+                  <CardTitle className="text-white">Rating Management</CardTitle>
+                  <CardDescription className="text-gray-400">Manage all user ratings and reviews</CardDescription>
                 </div>
                 <div className="relative">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search ratings..." className="pl-8 w-64" />
+                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
+                  <Input placeholder="Search ratings..." className="pl-8 w-64 bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500" />
                 </div>
               </CardHeader>
               <CardContent>
                 {loading ? (
                   <div className="flex justify-center items-center h-32">
-                    <p>Loading ratings...</p>
+                    <p className="text-gray-400">Loading ratings...</p>
                   </div>
                 ) : (
                   <Table>
                     <TableHeader>
-                      <TableRow>
-                        <TableHead>User</TableHead>
-                        <TableHead>Store</TableHead>
-                        <TableHead>Rating</TableHead>
-                        <TableHead>Comment</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
+                      <TableRow className="border-gray-700">
+                        <TableHead className="text-gray-300">User</TableHead>
+                        <TableHead className="text-gray-300">Store</TableHead>
+                        <TableHead className="text-gray-300">Rating</TableHead>
+                        <TableHead className="text-gray-300">Comment</TableHead>
+                        <TableHead className="text-gray-300">Date</TableHead>
+                        <TableHead className="text-right text-gray-300">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {ratings.length === 0 ? (
-                        <TableRow>
-                          <TableCell colSpan={6} className="text-center py-4">
+                        <TableRow className="border-gray-700">
+                          <TableCell colSpan={6} className="text-center py-4 text-gray-400">
                             No ratings found
                           </TableCell>
                         </TableRow>
                       ) : (
                         ratings.map((rating) => (
-                          <TableRow key={getRatingId(rating)}>
-                            <TableCell className="font-medium">
+                          <TableRow key={getRatingId(rating)} className="border-gray-700 hover:bg-gray-750">
+                            <TableCell className="font-medium text-white">
                               {getUserNameById(rating.user_id)}
                             </TableCell>
-                            <TableCell>{getStoreNameById(rating.store_id)}</TableCell>
+                            <TableCell className="text-gray-300">{getStoreNameById(rating.store_id)}</TableCell>
                             <TableCell>
                               <div className="flex items-center gap-1">
                                 {[...Array(5)].map((_, i) => (
                                   <Star 
                                     key={i} 
-                                    className={`h-4 w-4 ${i < rating.rating_value ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} 
+                                    className={`h-4 w-4 ${i < rating.rating_value ? "fill-yellow-400 text-yellow-400" : "text-gray-500"}`} 
                                   />
                                 ))}
                               </div>
                             </TableCell>
-                            <TableCell className="max-w-xs truncate">
+                            <TableCell className="max-w-xs truncate text-gray-300">
                               {rating.comment || rating.review || "No comment"}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="text-gray-300">
                               {rating.created_at 
                                   ? new Date(rating.created_at).toLocaleDateString('en-US', {
                                       year: 'numeric',
@@ -885,14 +940,14 @@ export default function AdminDashboard() {
                             <TableCell className="text-right">
                               <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                  <Button variant="ghost" className="h-8 w-8 p-0">
+                                  <Button variant="ghost" className="h-8 w-8 p-0 text-gray-400 hover:bg-gray-700 hover:text-white">
                                     <MoreHorizontal className="h-4 w-4" />
                                   </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                  <DropdownMenuItem>View Details</DropdownMenuItem>
+                                <DropdownMenuContent align="end" className="bg-gray-700 border-gray-600">
+                                  <DropdownMenuItem className="text-gray-300 hover:bg-gray-600 hover:text-white">View Details</DropdownMenuItem>
                                   <DropdownMenuItem 
-                                    className="text-red-600"
+                                    className="text-red-400 hover:bg-gray-600 hover:text-red-300"
                                     onClick={() => handleDeleteRating(rating)}
                                   >
                                     Delete Rating
