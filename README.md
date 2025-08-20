@@ -54,30 +54,3 @@ npm run preview
 * **Normal User**: sign up, log in, search stores, submit/modify ratings.
 * **System Administrator**: log in, manage stores and users, view dashboards and listings.
 * **Store Owner**: log in, view users who rated their store, check average rating.
-
-Screenshots to demonstrate usage:
-
-`
-
-For example:
-
-* Login Screen
-  ![Login Screen](./screenshots/Screenshot7.png)
-  ![Login Screen](./screenshots/Screenshot8.png)
-
-* Owner Dashboard
-  ![Signup Screen](./screenshots/Screenshot6.png)
-  ![Signup Screen](./screenshots/Screenshot5.png)
-  ![Signup Screen](./screenshots/Screenshot4.png)
-
-* Admin Dashboard
-  ![Admin Dashboard](./screenshots/Screenshot3.png)
-  ![Admin Dashboard](./screenshots/Screenshot2.png)
-
-* User Dashboard
-  ![Admin Dashboard](./screenshots/Screenshot1.png)
-
-
----
-
-##
