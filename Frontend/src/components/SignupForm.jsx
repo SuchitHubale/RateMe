@@ -7,6 +7,7 @@ import { Textarea } from "../components/Textarea"
 import { Alert, AlertDescription } from "../components/Alert"
 import { Eye, EyeOff, Mail, Lock, User, MapPin } from "lucide-react"
 import { NavLink } from "react-router-dom"
+import toast from 'react-hot-toast'
 
 import axios from "axios";
 
@@ -96,9 +97,9 @@ console.log("Signup stage 2");
     console.error("Signup error:", err)
 
     if (err.response?.data?.message) {
-      alert(err.response.data.message) // You can replace this with a nicer UI alert
+      toast.error(err.response.data.message) // You can replace this with a nicer UI alert
     } else {
-      alert("Something went wrong. Please try again.")
+      toast.error("Something went wrong. Please try again.")
     }
   } finally {
     setIsLoading(false)
